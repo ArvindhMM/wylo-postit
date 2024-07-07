@@ -1,0 +1,97 @@
+.post-item {
+    background-color: #E9C46A; 
+    color:  #203942;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 15px;
+    position: relative;
+    height: 35vh;
+    width: 20vw;
+    overflow-y: auto;
+  }
+  @media screen and  (min-width: 340px) and (max-width: 468px)  {
+    .post-item{
+        width: 80%;
+    }
+    .title {
+        font-size: 40px;
+        
+      }
+      .description{
+        font-size: 25px;
+        line-height: 1.5;
+        text-align: justify ;
+      }
+  }
+  @media screen and  (min-width: 467px) and (max-width: 768px)  {
+    .post-item{
+        width: 40%;
+    }
+    .title {
+        font-size: 40px;
+        
+      }
+      .description{
+        font-size: 25px;
+        line-height: 1.5;
+        text-align: justify ;
+      }
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    .post-item{
+        width: 35%;
+        height:30vh;
+    }
+  }
+
+  .post-item:hover{
+    border: solid .5px #ffeb99;
+  }
+  
+  .title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  .description{
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: justify ;
+  }
+  
+  .post-item .post-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+  }
+  
+  .post-item:hover .post-buttons button {
+    color: rgb(240, 74, 52);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 3px;
+    margin-left: 5px;
+    font-size: 1.1rem;
+  } 
+  .post-item:hover .post-buttons .edit{
+    color: rgb(65, 132, 255);
+  }
+   
+
+  .post-item .post-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 0.9em;
+  }
+  
+  
