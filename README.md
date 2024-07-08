@@ -43,7 +43,7 @@ Make sure you have the following installed on your machine:
       npm start
 2.Open your browser and navigate to http://localhost:3000 to see the application in action.
 
-##Usage
+## Usage
 1. **Creating a Post**: Click on the "+ New Post" button, fill in the title, category, and description, and click "Submit".
 2. **Editing a Post**: Click the edit icon on a post, modify the details, and click "Submit".
 3. **Deleting a Post**: Click the delete icon on a post.
