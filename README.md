@@ -31,16 +31,18 @@ Make sure you have the following installed on your machine:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/post-it-app.git
-2. **Navigate to the project directory**
+2. **Navigate to the project directory**:
+   ```bash
+   cd post-it-app
 3. **Install the dependencies**:
    ```bash
-     npm install
+   npm install
 
 ## Running the Application
 
 1. **Start the development server**:
     ```bash
-      npm start
+    npm start
 2.Open your browser and navigate to http://localhost:3000 to see the application in action.
 
 ## Usage
