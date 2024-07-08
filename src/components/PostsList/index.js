@@ -93,7 +93,9 @@ function PostList() {
     setPosts(posts.filter(post => post.id !== id));
   };
 
+  //categories
   const categories = [ 'Personal','Work','Health', 'Others']; 
+  //filter posts based on selected category, default is All
   const filteredPosts = selectedCategory === 'All' ? posts : posts.filter(post => post.category === selectedCategory);
 
   return (
