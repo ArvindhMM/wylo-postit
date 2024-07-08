@@ -25,7 +25,7 @@
     width: 95%;
     margin: auto;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 340px) and (max-width: 768px) {
   .post-list{
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     width: 95%;
   }    
 }
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 768px) and  (max-width: 1024px) {
   .post-list{
     display: flex;
     flex-direction: row;
@@ -113,7 +113,27 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
   }
-  
+  .categories-filter:hover{
+    background-color: #bcece8;
+    color: rgb(37, 37, 37);
+  }
+  .categories-filter-label{
+    font-weight: 500;
+  }
+  .categories-filter{
+    width: 10vw;
+    margin-left: 5px;
+    padding: 2px;
+    border-radius: 8px;
+    background-color: #065f5f;
+    color: white;
+  }
+  .categories-filter-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+  }
   .modal {
     position: relative;
     background: white;
@@ -121,11 +141,14 @@
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1;
-    width: 60%;
-    
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .modal select{
+    font-size: medium;
+    padding: 2px;
   }
   .form-buttons{
     display: flex;

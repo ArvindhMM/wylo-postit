@@ -5,7 +5,10 @@ import './index.css';
 function PostList() {
   const [posts, setPosts] = useState([]);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
+
+  //useEffect get posts array in local storage and set it to the posts array state when the component mounts
   useEffect(() => {
     const storedPosts = localStorage.getItem('posts');
     if (storedPosts && storedPosts !== 'null') {
@@ -15,6 +18,7 @@ function PostList() {
     setIsInitialized(true);
   }, []);
 
+  //useEffect to store the posts array in local storage when the post array changes
   useEffect(() => {
     if (isInitialized) {
       localStorage.setItem('posts', JSON.stringify(posts));
@@ -23,65 +27,96 @@ function PostList() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [editingPost, setEditingPost] = useState(null);
+
+
 
   const [affirmationMessage, setAffirmationMessage] = useState('');
   const [showAffirmation, setShowAffirmation] = useState(false);
 
+  //open modal to create and edit posts
   const openModal = (post = null) => {
     if (post) {
       setEditingPost(post);
       setTitle(post.title);
+      setCategory(post.category);
       setDescription(post.description);
     } else {
       setEditingPost(null);
       setTitle('');
+      setCategory('');
       setDescription('');
     }
     setIsModalOpen(true);
   };
-  
+
+
+  //set title and description to empty string and close modal 
   const closeModal = () => {
     setIsModalOpen(false);
     setTitle('');
+    setCategory('');
     setDescription('');
   };
 
+
+  //Handle sumit and create and edit posts
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingPost) {
-      setPosts(posts.map(post => post.id === editingPost.id ? { ...post, title, description } : post));
-      setAffirmationMessage('Post updated successfully!');
+      setPosts(posts.map(post => post.id === editingPost.id ? { ...post, title,category, description } : post));
+      setAffirmationMessage('Post updated successfully!'); //Affirmation message when post is updated
     } else {
       const newPost = {
         id: Date.now(),
         title,
+        category,
         description,
       };
       setPosts([...posts, newPost]);
-      setAffirmationMessage('Post created successfully!');
+      setAffirmationMessage('Post created successfully!'); //Affirmation message when post is created
     }
     setShowAffirmation(true);
     closeModal();
 
+    //timer to show affirmation message
     setTimeout(() => {
       setShowAffirmation(false);
       setAffirmationMessage('');
     }, 1000);
   };
 
+  //delete post 
   const deletePost = (id) => {
     setPosts(posts.filter(post => post.id !== id));
   };
 
+  const categories = [ 'Personal','Work','Health', 'Others']; 
+  const filteredPosts = selectedCategory === 'All' ? posts : posts.filter(post => post.category === selectedCategory);
+
   return (
     <main className='content-container'>
+      <section className='categories-filter-container'>
+      <label htmlFor="filter" className='categories-filter-label'>Category : </label>
+      <select
+      id="filter"
+      value={selectedCategory}
+      onChange={(e) => setSelectedCategory(e.target.value)}
+      className='categories-filter'
+      >
+        <option value="All">All</option>
+        {categories.map((cat) => (
+        <option key={cat} value={cat}>{cat}</option>
+      ))}
+      </select>
+      </section>
       <section className="post-list">
-        {posts.length === 0 ? (
+        {filteredPosts.length === 0 ? (
           <p className="no-posts">Nothing here yet. <br />Create a post to fill this space!</p>
         ) : (
-          posts.map(post => (
+          filteredPosts.map(post => (
             <PostItem key={post.id} post={post} onDelete={deletePost} onEdit={openModal}/>
           ))
         )}
@@ -89,6 +124,7 @@ function PostList() {
       <section className="new-post">
         <button onClick={() => openModal()}>+ New Post</button>
       </section>
+     { /*Create and edit posts modal */}
       {isModalOpen && (
         <div className='modal-container'>
           <div className="modal-overlay" onClick={closeModal}></div>
@@ -103,6 +139,18 @@ function PostList() {
                 required
                 placeholder='Title'
               />
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="">Select Category</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
               <label htmlFor="description">Description</label>
               <textarea
                 id="description"
@@ -121,6 +169,7 @@ function PostList() {
           </div>
         </div>
       )}
+      { /*Affirmation message modal when post is created or updated*/}
       {showAffirmation && (
         <div className='affirmation-modal-container'>
           <div className="affirmation-modal-overlay"></div>
